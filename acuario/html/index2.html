@@ -6,16 +6,20 @@
         <script type="text/javascript" src="/webiopi.js"></script>
         <script type="text/javascript">
         webiopi().ready(function() {
-                // Following function will process data received from set/getLightHours macro.
+                             
+  // Following function will process data received from set/getLightHours macro.
                 var updateLightHours = function(macro, args, response) {
                     var hours = response.split(";");
                     // Following lines use jQuery functions
                     $("#inputOn").val(hours[0]);
                     $("#inputOff").val(hours[1]);
-                    $("#azulOn").val(hours[2]);
-                    $("#azulOff").val(hours[3]);
                 }
-
+                var actualizarazul = function(macro, args, response) {
+                    var horas = response.split(";");
+                    $("#azulOn").val(horas[0]);
+                    $("#azulOff").val(horas[1]);
+                }
+                webiopi().callMacro("obtenerluzazul", [], actualizarazul);
                 // Immediately call getLightHours macro to update the UI with current values
                 // "getLightHours" refers to macro name
                 // [] is an empty array, because getLightHours macro does not take any argument
@@ -25,7 +29,7 @@
                 // Create a button to call setLightHours macro
                 var sendButton = webiopi().createButton("sendButton", "Actualizar", function() {
                    // Arguments sent to the macro
-                    var hours = [$("#inputOn").val(), $("#inputOff").val(), $("#azulOn").val(), $("#azulOff").val()];
+                    var hours = [$("#inputOn").val(), $("#inputOff").val()];
                     // Call the macro
                     webiopi().callMacro("setLightHours", hours, updateLightHours);
                 });

@@ -51,7 +51,7 @@ def destroy():
     GPIO.digitalWrite(LUZAZUL, GPIO.LOW)
 @webiopi.macro
 def getLightHours():
-    return "%d;%d;%d;%d" % (HOUR_ON, HOUR_OFF, hora_on_azul, hora_off_azul)
+    return "%d;%d" % (HOUR_ON, HOUR_OFF)
    
 @webiopi.macro
 def setLightHours(on, off):
@@ -59,3 +59,7 @@ def setLightHours(on, off):
     HOUR_ON = int(on)
     HOUR_OFF = int(off)
     return getLightHours()
+
+@webiopi.macro
+def obtenerluzazul():
+    return "%d;%d" % (hora_on_azul, hora_off_azul)
