@@ -57,5 +57,5 @@ def getLightHours():
 def setLightHours(on, off):
     global HOUR_ON, HOUR_OFF
     HOUR_ON = int(on)
-    HOUR_OFF = int(off)º
+    HOUR_OFF = int(off)
     return getLightHours()
